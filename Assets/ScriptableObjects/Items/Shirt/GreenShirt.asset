@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49b1aef6471ae6c42a71c06c60b5abc4, type: 3}
+  m_Script: {fileID: 11500000, guid: a042616ddd604413a0a81132813fbf27, type: 3}
   m_Name: GreenShirt
   m_EditorClassIdentifier: 
-  price: 100
-  icon: {fileID: 1743558276, guid: d9c67dc75571a17458874660ec4bb6ef, type: 3}
-  prefab: {fileID: 7153269556653594975, guid: 762a2cad77cf0c8458a44076ff3d611a, type: 3}
-  equiped: 0
+  <Type>k__BackingField: 0
+  <Name>k__BackingField: 
+  <Icon>k__BackingField: {fileID: 0}
+  <Prefab>k__BackingField: {fileID: 0}
