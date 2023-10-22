@@ -13,10 +13,13 @@ public class Inventory : MonoBehaviour
     [SerializeField] private ItemSlot shoesSlot;
     [SerializeField] private ItemSlot hairSlot;
     [SerializeField] private ItemSlot hatSlot;
+    
+    [field: SerializeField] public int TotalSlot { get; private set; }
+    private int slotsFilled;
+    public bool isInventoryFull => slotsFilled >= TotalSlot;
+    [field: SerializeField] public int Coins { get; private set; }
 
-    [SerializeField] private List<Item> items;
-
-    public event Action<List<Item>> OnEndInitialization;
+    [SerializeField] private Item[] items;
     public event Action<int, Item> OnAddItem;
     public event Action<int, Item> OnRemoveItem;
 
@@ -35,18 +38,19 @@ public class Inventory : MonoBehaviour
         }
     }
 
-
     public void AddItem(Item item)
     {
-        items.Add(item);
-        var itemIndex = items.Count - 1;
-        OnAddItem?.Invoke(itemIndex, item);
+        var firstNullSlot = Array.IndexOf(items, null);
+        items[firstNullSlot] = item;
+        slotsFilled++;
+        OnAddItem?.Invoke(firstNullSlot, item);
     }
 
     public void RemoveItem(Item item)
     {
-        var itemIndex = items.IndexOf(item);
-        items.Remove(item);
+        var itemIndex = Array.IndexOf(items, item);
+        items = null;
+        slotsFilled--;
         OnRemoveItem?.Invoke(itemIndex, item);
     }
 
@@ -75,6 +79,16 @@ public class Inventory : MonoBehaviour
                 hatSlot.Equip(item);
                 break;
         }
+    }
+
+    public void AddCoins(int amount)
+    {
+        Coins += amount;
+    }
+
+    public void SubtractCoins(int amount)
+    {
+        Coins -= amount;
     }
 
     private void OnDestroy()

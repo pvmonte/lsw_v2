@@ -50,6 +50,10 @@ public class Shop : MonoBehaviour
 
     private void Buy(Item item)
     {
+        if (item.Price > Inventory.Instance.Coins) return;
+        if (Inventory.Instance.isInventoryFull) return;
+        
+        Inventory.Instance.SubtractCoins(item.Price);
         Inventory.Instance.AddItem(item);
     }
 
