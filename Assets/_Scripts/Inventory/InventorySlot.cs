@@ -10,11 +10,6 @@ public class InventorySlot : MonoBehaviour
     [SerializeField] private Image icon;
     [SerializeField] private GameObject equippedIcon;
 
-    private void Awake()
-    {
-        GetComponent<Button>().onClick.AddListener(OnSelect);
-    }
-
     public void Fill(Item item)
     {
         fillingItem = item;
