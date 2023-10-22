@@ -24,10 +24,22 @@ public class InventoryUI : MonoBehaviour
         if (!inventory)
             inventory = GetComponent<Inventory>();
         
-        inventory.OnEndInitialization += InventoryOnOnEndInitialization;
+        inventory.OnEndInitialization += Inventory_OnEndInitialization;
+        inventory.OnAddItem += Inventory_OnAddItem;
+        inventory.OnRemoveItem += Inventory_OnRemoveItem;
     }
 
-    private void InventoryOnOnEndInitialization(List<Item> inventoryItems)
+    private void Inventory_OnRemoveItem(int index, Item item)
+    {
+        bagSlot[index].SetEmpty();
+    }
+
+    private void Inventory_OnAddItem(int index, Item item)
+    {
+        bagSlot[index].Fill(item);
+    }
+
+    private void Inventory_OnEndInitialization(List<Item> inventoryItems)
     {
         for (int i = 0; i < inventoryItems.Count; i++)
         {
@@ -69,6 +81,6 @@ public class InventoryUI : MonoBehaviour
 
     public void Unequip(Item item)
     {
-        selectedSlot.SetEmpty(item);
+        selectedSlot.SetEmpty();
     }
 }

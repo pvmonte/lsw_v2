@@ -14,6 +14,9 @@ public class Inventory : MonoBehaviour
     [SerializeField] private List<Item> items;
 
     public event Action<List<Item>> OnEndInitialization;
+    public event Action<int, Item> OnAddItem;
+    public event Action<int, Item> OnRemoveItem;
+    
 
     private void Start()
     {
@@ -23,11 +26,20 @@ public class Inventory : MonoBehaviour
     public void AddItem(Item item)
     {
         items.Add(item);
+        var itemIndex = items.Count - 1;
+        OnAddItem?.Invoke(itemIndex, item);
     }
     
     public void RemoveItem(Item item)
     {
         items.Remove(item);
+        var itemIndex = items.IndexOf(item);
+        OnRemoveItem?.Invoke(itemIndex, item);
+    }
+
+    public List<Item> GetInventoryItems()
+    {
+        return new List<Item>(items);
     }
 
     public void EquipItem(Item item)
@@ -50,22 +62,5 @@ public class Inventory : MonoBehaviour
                 hatSlot.Equip(item);
                 break;
         }
-    }
-}
-
-[System.Serializable]
-public class ItemSlot
-{
-    [SerializeField] private GameObject equipped;
-    [SerializeField] private Transform slotTransform;
-
-    public void Equip(Item item)
-    {
-        if (equipped != null)
-        {
-            GameObject.Destroy(equipped.gameObject);
-        }
-        
-        equipped = GameObject.Instantiate(item.Prefab, slotTransform);
     }
 }

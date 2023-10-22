@@ -15,4 +15,5 @@ MonoBehaviour:
   <Type>k__BackingField: 4
   <Name>k__BackingField: PinkHat
   <Icon>k__BackingField: {fileID: 171176923, guid: 0ce3599e1ea14f349b79aaf945216899, type: 3}
+  <Price>k__BackingField: 100
   <Prefab>k__BackingField: {fileID: 7470364064198307693, guid: da657e7e2cf844c4fa99782ff4bfb294, type: 3}

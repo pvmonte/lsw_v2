@@ -17,7 +17,7 @@ public class InventorySlot : MonoBehaviour
         icon.color = Color.white;
     }
 
-    public void SetEmpty(Item item)
+    public void SetEmpty()
     {
         fillingItem = null;
         icon.sprite = null;
