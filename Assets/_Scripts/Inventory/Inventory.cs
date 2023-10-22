@@ -46,12 +46,11 @@ public class Inventory : MonoBehaviour
         OnAddItem?.Invoke(firstNullSlot, item);
     }
 
-    public void RemoveItem(Item item)
+    public void RemoveItem(int index, Item item)
     {
-        var itemIndex = Array.IndexOf(items, item);
-        items = null;
+        items[index] = null;
         slotsFilled--;
-        OnRemoveItem?.Invoke(itemIndex, item);
+        OnRemoveItem?.Invoke(index, item);
     }
 
     public List<Item> GetInventoryItems()

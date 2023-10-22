@@ -42,7 +42,12 @@ public class BagUI : MonoBehaviour
 
     public void Sell()
     {
-        Inventory.Instance.RemoveItem(SelectedSlot.fillingItem);
+        if (!SelectedSlot.fillingItem) return;
+
+        var slotIndex = Array.IndexOf(bagSlots, SelectedSlot);
+        
+        Inventory.Instance.AddCoins(SelectedSlot.fillingItem.Price);
+        Inventory.Instance.RemoveItem(slotIndex, SelectedSlot.fillingItem);
     }
 
     private void OnDestroy()
