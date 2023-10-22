@@ -35,10 +35,6 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        OnEndInitialization?.Invoke(items);
-    }
 
     public void AddItem(Item item)
     {

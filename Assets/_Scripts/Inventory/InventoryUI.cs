@@ -4,23 +4,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-[RequireComponent(typeof(Inventory))]
 public class InventoryUI : MonoBehaviour
 {
-    [SerializeField] private Inventory inventory;
 
     [SerializeField] private EquippedSlots equippedSlots;
 
     [SerializeField] private BagUI bag;
+    
+    public event Action OnOpen;
+    public event Action OnClose;
 
-    private void Awake()
+    private void OnEnable()
     {
-        if (!inventory)
-            inventory = GetComponent<Inventory>();
-        
-        inventory.OnEndInitialization += Inventory_OnEndInitialization;
-        inventory.OnAddItem += Inventory_OnAddItem;
-        inventory.OnRemoveItem += Inventory_OnRemoveItem;
+        OnOpen?.Invoke();
+    }
+
+    private void Start()
+    {
+        Inventory.Instance.OnAddItem += Inventory_OnAddItem;
+        Inventory.Instance.OnRemoveItem += Inventory_OnRemoveItem;
+        Initialize();
     }
 
     private void Inventory_OnRemoveItem(int index, Item item)
@@ -33,8 +36,10 @@ public class InventoryUI : MonoBehaviour
         bag.FillSlot(index, item);
     }
 
-    private void Inventory_OnEndInitialization(List<Item> inventoryItems)
+    private void Initialize()
     {
+        var inventoryItems = Inventory.Instance.GetInventoryItems();
+        
         for (int i = 0; i < inventoryItems.Count; i++)
         {
             bag.FillSlot(i, inventoryItems[i]);
@@ -47,11 +52,16 @@ public class InventoryUI : MonoBehaviour
 
         equippedSlots.Fill(item);
         bag.SelectedSlot.Equip();
-        inventory.EquipItem(item);
+        Inventory.Instance.EquipItem(item);
     }
 
     public void Unequip(Item item)
     {
         equippedSlots.SetEmpty();
+    }
+
+    private void OnDisable()
+    {
+        OnClose?.Invoke();
     }
 }

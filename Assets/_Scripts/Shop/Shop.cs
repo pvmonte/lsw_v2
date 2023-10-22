@@ -10,7 +10,14 @@ public class Shop : MonoBehaviour
     [SerializeField] private List<Item> items;
     
     [SerializeField] private BagUI bag;
-    [SerializeField] private Transform inventoryArea;
+
+    public event Action OnOpen;
+    public event Action OnClose;
+
+    private void OnEnable()
+    {
+        OnOpen?.Invoke();
+    }
 
     private void Start()
     {
@@ -44,5 +51,10 @@ public class Shop : MonoBehaviour
     private void Buy(Item item)
     {
         Inventory.Instance.AddItem(item);
+    }
+
+    private void OnDisable()
+    {
+        OnClose?.Invoke();
     }
 }
