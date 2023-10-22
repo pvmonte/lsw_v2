@@ -9,15 +9,9 @@ public class InventoryUI : MonoBehaviour
 {
     [SerializeField] private Inventory inventory;
 
-    [SerializeField] private InventorySlot shirtSlot;
-    [SerializeField] private InventorySlot pantsSlot;
-    [SerializeField] private InventorySlot shoesSlot;
-    [SerializeField] private InventorySlot hairSlot;
-    [SerializeField] private InventorySlot hatSlot;
+    [SerializeField] private EquippedSlots equippedSlots;
 
-    [SerializeField] private InventorySlot[] bagSlot;
-
-    [SerializeField] private InventorySlot selectedSlot;
+    [SerializeField] private BagUI bag;
 
     private void Awake()
     {
@@ -31,56 +25,33 @@ public class InventoryUI : MonoBehaviour
 
     private void Inventory_OnRemoveItem(int index, Item item)
     {
-        bagSlot[index].SetEmpty();
+        bag.SetSlotEmpty(index);
     }
 
     private void Inventory_OnAddItem(int index, Item item)
     {
-        bagSlot[index].Fill(item);
+        bag.FillSlot(index, item);
     }
 
     private void Inventory_OnEndInitialization(List<Item> inventoryItems)
     {
         for (int i = 0; i < inventoryItems.Count; i++)
         {
-            bagSlot[i].Fill(inventoryItems[i]);
+            bag.FillSlot(i, inventoryItems[i]);
         }
-    }
-
-    public void SetSelected(InventorySlot slot)
-    {
-        selectedSlot = slot;
     }
 
     public void Equip()
     {
-        var item = selectedSlot.fillingItem;
+        var item = bag.SelectedSlot.fillingItem;
 
-        switch (item.Type)
-        {
-            case ItemType.Shirt:
-                shirtSlot.Fill(item);
-                break;
-            case ItemType.Pants:
-                pantsSlot.Fill(item);
-                break;
-            case ItemType.Shoes:
-                shoesSlot.Fill(item);
-                break;
-            case ItemType.Hair:
-                hairSlot.Fill(item);
-                break;
-            case ItemType.Hat:
-                hatSlot.Fill(item);
-                break;
-        }
-
-        selectedSlot.Equip();
+        equippedSlots.Fill(item);
+        bag.SelectedSlot.Equip();
         inventory.EquipItem(item);
     }
 
     public void Unequip(Item item)
     {
-        selectedSlot.SetEmpty();
+        equippedSlots.SetEmpty();
     }
 }

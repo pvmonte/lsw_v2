@@ -1,11 +1,14 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public class InventorySlot : MonoBehaviour
+public class InventorySlot : MonoBehaviour , ISelectHandler
 {
-    [SerializeField] private InventoryUI inventoryUI;
+    //TODO: Remove crossed Reference
+    [SerializeField] private BagUI bagUI;
     [field: SerializeField] public Item fillingItem { get; private set; } 
     [SerializeField] private Image icon;
     [SerializeField] private GameObject equippedIcon;
@@ -36,7 +39,12 @@ public class InventorySlot : MonoBehaviour
 
     public void OnSelect()
     {
-        inventoryUI.SetSelected(this);
+        bagUI.SetSelected(this);
+    }
+
+    public void OnSelect(BaseEventData eventData)
+    {
+        OnSelect();
     }
 }
 

@@ -10,8 +10,8 @@ public class Shop : MonoBehaviour
     [SerializeField] private List<Item> items;
     
     [SerializeField] private Inventory inventory;
+    [SerializeField] private BagUI bag;
     [SerializeField] private Transform inventoryArea;
-    [SerializeField] private InventorySlot[] inventorySlots;
 
     private void Start()
     {
@@ -25,7 +25,7 @@ public class Shop : MonoBehaviour
         
         for (int i = 0; i < inventoryItems.Count; i++)
         {
-            inventorySlots[i].Fill(inventoryItems[i]);
+            bag.FillSlot(i, inventoryItems[i]);
         }
         
         inventory.OnAddItem += Inventory_OnAddItem;
@@ -34,12 +34,12 @@ public class Shop : MonoBehaviour
 
     private void Inventory_OnAddItem(int index, Item item)
     {
-        inventorySlots[index].Fill(item);
+        bag.FillSlot(index, item);
     }
     
     private void Inventory_OnRemoveItem(int index, Item item)
     {
-        inventorySlots[index].SetEmpty();
+        bag.SetSlotEmpty(index);
     }
 
     private void Buy(Item item)
