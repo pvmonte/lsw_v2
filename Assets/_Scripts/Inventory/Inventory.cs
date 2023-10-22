@@ -66,6 +66,6 @@ public class ItemSlot
             GameObject.Destroy(equipped.gameObject);
         }
         
-        GameObject.Instantiate(item, slotTransform);
+        equipped = GameObject.Instantiate(item.Prefab, slotTransform);
     }
 }

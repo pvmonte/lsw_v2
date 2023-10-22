@@ -64,6 +64,7 @@ public class InventoryUI : MonoBehaviour
         }
 
         selectedSlot.Equip();
+        inventory.EquipItem(item);
     }
 
     public void Unequip(Item item)
