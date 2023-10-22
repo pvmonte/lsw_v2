@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,7 +12,14 @@ public class Inventory : MonoBehaviour
     [SerializeField] private ItemSlot hatSlot;
     
     [SerializeField] private List<Item> items;
-    
+
+    public event Action<List<Item>> OnEndInitialization;
+
+    private void Start()
+    {
+        OnEndInitialization?.Invoke(items);
+    }
+
     public void AddItem(Item item)
     {
         items.Add(item);
