@@ -22,7 +22,7 @@ public class BagUI : MonoBehaviour
     
     private void Inventory_OnRemoveItem(int index, Item item)
     {
-        SelectedSlot.SetEmpty();
+        SetSlotEmpty(index);
     }
 
     public void FillSlot(int index, Item item)

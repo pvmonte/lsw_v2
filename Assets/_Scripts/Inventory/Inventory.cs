@@ -5,18 +5,35 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    public static Inventory Instance { get; private set; }
+    public bool isAlive { get; private set; }
+
     [SerializeField] private ItemSlot shirtSlot;
     [SerializeField] private ItemSlot pantsSlot;
     [SerializeField] private ItemSlot shoesSlot;
     [SerializeField] private ItemSlot hairSlot;
     [SerializeField] private ItemSlot hatSlot;
-    
+
     [SerializeField] private List<Item> items;
 
     public event Action<List<Item>> OnEndInitialization;
     public event Action<int, Item> OnAddItem;
     public event Action<int, Item> OnRemoveItem;
-    
+
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            isAlive = true;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -29,11 +46,11 @@ public class Inventory : MonoBehaviour
         var itemIndex = items.Count - 1;
         OnAddItem?.Invoke(itemIndex, item);
     }
-    
+
     public void RemoveItem(Item item)
     {
-        items.Remove(item);
         var itemIndex = items.IndexOf(item);
+        items.Remove(item);
         OnRemoveItem?.Invoke(itemIndex, item);
     }
 
@@ -62,5 +79,10 @@ public class Inventory : MonoBehaviour
                 hatSlot.Equip(item);
                 break;
         }
+    }
+
+    private void OnDestroy()
+    {
+        isAlive = false;
     }
 }

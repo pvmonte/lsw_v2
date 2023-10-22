@@ -9,7 +9,6 @@ public class Shop : MonoBehaviour
     [SerializeField] private ShopSlot shopSlotPrefab;
     [SerializeField] private List<Item> items;
     
-    [SerializeField] private Inventory inventory;
     [SerializeField] private BagUI bag;
     [SerializeField] private Transform inventoryArea;
 
@@ -21,15 +20,15 @@ public class Shop : MonoBehaviour
             shopSlot.Initialize(this, items[i], Buy);
         }
 
-        var inventoryItems = inventory.GetInventoryItems();
+        var inventoryItems = Inventory.Instance.GetInventoryItems();
         
         for (int i = 0; i < inventoryItems.Count; i++)
         {
             bag.FillSlot(i, inventoryItems[i]);
         }
         
-        inventory.OnAddItem += Inventory_OnAddItem;
-        inventory.OnRemoveItem += Inventory_OnRemoveItem;
+        Inventory.Instance.OnAddItem += Inventory_OnAddItem;
+        Inventory.Instance.OnRemoveItem += Inventory_OnRemoveItem;
     }
 
     private void Inventory_OnAddItem(int index, Item item)
@@ -44,6 +43,6 @@ public class Shop : MonoBehaviour
 
     private void Buy(Item item)
     {
-        inventory.AddItem(item);
+        Inventory.Instance.AddItem(item);
     }
 }
