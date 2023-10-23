@@ -8,61 +8,21 @@ namespace ShopSystem
 {
     public class Shop : MonoBehaviour
     {
-        [SerializeField] private Transform contentArea;
-        [SerializeField] private ShopSlot shopSlotPrefab;
         [SerializeField] private List<Item> items;
+        public List<Item> Items => items;
         
-        [SerializeField] private BagUI bag;
+        public event Action OnBuy;
     
-        public event Action OnOpen;
-        public event Action OnClose;
-    
-        private void OnEnable()
+        public void Buy(Item item)
         {
-            OnOpen?.Invoke();
-        }
-    
-        private void Start()
-        {
-            for (int i = 0; i < items.Count; i++)
+            if (Inventory.Instance.CanFinishBuyTransaction(item.Price))
             {
-                var shopSlot = Instantiate(shopSlotPrefab, contentArea);
-                shopSlot.Initialize(this, items[i], Buy);
-            }
-    
-            var inventoryItems = InventorySystem.Inventory.Instance.GetInventoryItems();
-            
-            for (int i = 0; i < inventoryItems.Count; i++)
-            {
-                bag.FillSlot(i, inventoryItems[i]);
+                items.Remove(item);
             }
             
-            InventorySystem.Inventory.Instance.OnAddItem += Inventory_OnAddItem;
-            InventorySystem.Inventory.Instance.OnRemoveItem += Inventory_OnRemoveItem;
-        }
-    
-        private void Inventory_OnAddItem(int index, Item item)
-        {
-            bag.FillSlot(index, item);
-        }
-        
-        private void Inventory_OnRemoveItem(int index, Item item)
-        {
-            bag.SetSlotEmpty(index);
-        }
-    
-        private void Buy(Item item)
-        {
-            if (item.Price > InventorySystem.Inventory.Instance.Coins) return;
-            if (InventorySystem.Inventory.Instance.isInventoryFull) return;
+            Inventory.Instance.Buy(item);
             
-            InventorySystem.Inventory.Instance.SubtractCoins(item.Price);
-            InventorySystem.Inventory.Instance.AddItem(item);
-        }
-    
-        private void OnDisable()
-        {
-            OnClose?.Invoke();
+            OnBuy?.Invoke();
         }
     }
 }
