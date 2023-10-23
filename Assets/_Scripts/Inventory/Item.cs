@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public enum ItemType
 {
@@ -19,6 +20,5 @@ namespace InventorySystem
         [field: SerializeField] public Sprite Icon { get; private set; }
         [field: SerializeField] public int Price { get; private set; }
         [field: SerializeField] public GameObject Prefab { get; private set; }
-        [field: SerializeField] public Animator Animator { get; private set; }
     }
 }

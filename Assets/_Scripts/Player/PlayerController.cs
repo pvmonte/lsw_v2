@@ -26,8 +26,8 @@ public class PlayerController : MonoBehaviour
         {
             if(item.Type != slots[i].Type) continue;
             
-            slots[i].Equip(item);
-            animation.AddPart(item.Animator);
+            var go = slots[i].Equip(item);
+            animation.AddPart(go.GetComponent<Animator>());
             break;
         }
     }

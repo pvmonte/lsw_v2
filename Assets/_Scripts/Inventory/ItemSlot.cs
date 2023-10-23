@@ -14,7 +14,7 @@ namespace InventorySystem
             slotTransform = transform;
         }
 
-        public void Equip(Item item)
+        public GameObject Equip(Item item)
         {
             if (equipped != null)
             {
@@ -22,6 +22,7 @@ namespace InventorySystem
             }
         
             equipped = Instantiate(item.Prefab, slotTransform);
+            return equipped;
         }
     }    
 }
