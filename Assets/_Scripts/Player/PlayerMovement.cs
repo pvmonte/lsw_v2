@@ -12,8 +12,12 @@ public class PlayerMovement : MonoBehaviour
     
     public void Move(InputAction.CallbackContext context)
     {
-        var currentSpeed = context.ReadValue<Vector2>() * moveSpeed;
+        var input = context.ReadValue<Vector2>();
+
+        //This makes the player move in one axis each time and gives priority to the X axis
+        if (input.x != 0) input.y = 0;
         
+        var currentSpeed = input * moveSpeed;
         rb.velocity = currentSpeed * moveSpeed;
     }
 
