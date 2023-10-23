@@ -106,7 +106,6 @@ MonoBehaviour:
   - {fileID: 2575126056672163197}
   - {fileID: 2575126055870991422}
   - {fileID: 2575126057478794252}
-  <SelectedSlot>k__BackingField: {fileID: 0}
 --- !u!1 &3372036834315451059
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,6 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d7659f8b1e3f74a86ba42ab4d0a9c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coinText: {fileID: 2344950813311210733}
   equippedSlots: {fileID: 6430947913782514231}
   bag: {fileID: 2689123972843158623}
 --- !u!1 &3707610528908151896
@@ -792,7 +792,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a11d40d288273f348828f4875c18f0a6, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7489430307794341943}
   - component: {fileID: 201570664494106193}
+  - component: {fileID: 657294688}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -84,6 +85,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &657294688
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 843437632778989181}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9c14cba15b368ef4fa4e4ee6ae7a2757, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1716051789735395111
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,6 +212,7 @@ GameObject:
   - component: {fileID: 1604634128}
   - component: {fileID: 1604634131}
   - component: {fileID: 5891848178778434403}
+  - component: {fileID: 993363224}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -336,7 +358,31 @@ MonoBehaviour:
     m_ActionId: 7dafad5e-dbc3-4b14-9e36-91116d94de00
     m_ActionName: UI/Submit[/Keyboard/enter]
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 1fa675f7-1d25-4448-97d1-06bf4bfa8aa3
     m_ActionName: UI/Cancel[/Keyboard/escape]
   - m_PersistentCalls:
@@ -367,6 +413,22 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: b5205bf7-46fe-4b1a-a403-245ec92c69ba
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+    m_ActionId: 3eb4ef02-745f-4b1d-a00b-69b61edef04a
+    m_ActionName: Player/OpenInventory[/Keyboard/i]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -398,14 +460,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4d0d377b323e043b96612fa1fcab5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slots: []
-  shirtSlot: {fileID: 0}
-  pantsSlot: {fileID: 0}
-  shoesSlot: {fileID: 0}
-  hairSlot: {fileID: 0}
-  hatSlot: {fileID: 0}
-  movement: {fileID: 0}
-  animation: {fileID: 0}
+  slots:
+  - {fileID: 2349908885198200095}
+  - {fileID: 5406949431638615496}
+  - {fileID: 122466893793860778}
+  - {fileID: 3774590896206370442}
+  - {fileID: 9065798899074388556}
+  movement: {fileID: 1604634128}
+  animation: {fileID: 993363224}
   bodyParts: []
 --- !u!114 &5891848178778434403
 MonoBehaviour:
@@ -419,6 +481,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bca1777284793648974681e37c09571, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &993363224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5899517191444879676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4460048cefa70724eb24b25c2e5596b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 657294688}
+  parts: []
 --- !u!1 &6142927819454266961
 GameObject:
   m_ObjectHideFlags: 0

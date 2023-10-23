@@ -20,6 +20,7 @@ namespace InventorySystem
         [SerializeField] private Item[] items;
         public event Action<int, Item> OnAddItem;
         public event Action<int, Item> OnRemoveItem;
+        public event Action<int> OnUpdateCoins;
 
 
         private void Awake()
@@ -34,6 +35,11 @@ namespace InventorySystem
             {
                 Destroy(gameObject);
             }
+        }
+
+        private void Start()
+        {
+            OnUpdateCoins?.Invoke(Coins);
         }
 
         public void AddItem(Item item)
@@ -64,11 +70,29 @@ namespace InventorySystem
         public void AddCoins(int amount)
         {
             Coins += amount;
+            OnUpdateCoins?.Invoke(Coins);
         }
 
         public void SubtractCoins(int amount)
         {
             Coins -= amount;
+            OnUpdateCoins?.Invoke(Coins);
+        }
+
+        public void Buy(Item item)
+        {
+            SubtractCoins(item.Price);
+            AddItem(item);
+        }
+
+        public bool CanFinishBuyTransaction(int price)
+        {
+            if (price > Coins || isInventoryFull)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private void OnDestroy()

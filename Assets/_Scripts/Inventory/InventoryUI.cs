@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -8,7 +9,7 @@ namespace InventorySystem
 {
     public class InventoryUI : MonoBehaviour
     {
-    
+        [SerializeField] private TextMeshProUGUI coinText;
         [SerializeField] private EquippedSlots equippedSlots;
     
         [SerializeField] private BagUI bag;
@@ -25,9 +26,15 @@ namespace InventorySystem
         {
             Inventory.Instance.OnAddItem += Inventory_OnAddItem;
             Inventory.Instance.OnRemoveItem += Inventory_OnRemoveItem;
+            Inventory.Instance.OnUpdateCoins += Inventory_OnUpdateCoins;
             Initialize();
         }
-    
+
+        private void Inventory_OnUpdateCoins(int coins)
+        {
+            coinText.text = coins + "G";
+        }
+
         private void Inventory_OnRemoveItem(int index, Item item)
         {
             bag.SetSlotEmpty(index);

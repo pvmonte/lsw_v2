@@ -9,11 +9,11 @@ namespace InventorySystem
     [RequireComponent(typeof(Button))]
     public class InventorySlot : MonoBehaviour, ISelectHandler
     {
-        //TODO: Remove crossed Reference
-        [SerializeField] private BagUI bagUI;
         [field: SerializeField] public Item fillingItem { get; private set; }
         [SerializeField] private Image icon;
         [SerializeField] private GameObject equippedIcon;
+
+        public event Action<InventorySlot> OnSelectEvent;
 
         public void Fill(Item item)
         {
@@ -43,7 +43,7 @@ namespace InventorySystem
 
         public void OnSelect()
         {
-            bagUI.SetSelected(this);
+            OnSelectEvent?.Invoke(this);
         }
 
         public void OnSelect(BaseEventData eventData)
