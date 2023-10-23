@@ -8,6 +8,7 @@ namespace ShopSystem
 {
     public class Shop : MonoBehaviour
     {
+        [SerializeField] private Inventory inventory;
         [SerializeField] private List<Item> items;
         public List<Item> Items => items;
         
@@ -15,12 +16,12 @@ namespace ShopSystem
     
         public void Buy(Item item)
         {
-            if (Inventory.Instance.CanFinishBuyTransaction(item.Price))
+            if (inventory.CanFinishBuyTransaction(item.Price))
             {
                 items.Remove(item);
             }
             
-            Inventory.Instance.Buy(item);
+            inventory.Buy(item);
             
             OnBuy?.Invoke();
         }

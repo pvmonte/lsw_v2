@@ -9,6 +9,7 @@ namespace InventorySystem
 {
     public class InventoryUI : MonoBehaviour
     {
+        [SerializeField] private Inventory inventory;
         [SerializeField] private TextMeshProUGUI coinText;
         [SerializeField] private EquippedSlots equippedSlots;
     
@@ -24,9 +25,9 @@ namespace InventorySystem
     
         private void Start()
         {
-            Inventory.Instance.OnAddItem += Inventory_OnAddItem;
-            Inventory.Instance.OnRemoveItem += Inventory_OnRemoveItem;
-            Inventory.Instance.OnUpdateCoins += Inventory_OnUpdateCoins;
+            inventory.OnAddItem += Inventory_OnAddItem;
+            inventory.OnRemoveItem += Inventory_OnRemoveItem;
+            inventory.OnUpdateCoins += Inventory_OnUpdateCoins;
             Initialize();
         }
 
@@ -47,7 +48,7 @@ namespace InventorySystem
     
         private void Initialize()
         {
-            var inventoryItems = Inventory.Instance.GetInventoryItems();
+            var inventoryItems = inventory.GetInventoryItems();
             
             for (int i = 0; i < inventoryItems.Count; i++)
             {
@@ -61,7 +62,7 @@ namespace InventorySystem
     
             equippedSlots.Fill(item);
             bag.SelectedSlot.Equip();
-            Inventory.Instance.EquipItem(item);
+            inventory.EquipItem(item);
         }
     
         public void Unequip(Item item)

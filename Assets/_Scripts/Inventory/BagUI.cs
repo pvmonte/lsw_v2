@@ -6,6 +6,7 @@ namespace InventorySystem
 {
     public class BagUI : MonoBehaviour
     {
+        [SerializeField] private Inventory inventory;
         [SerializeField] private InventorySlot[] bagSlots;
         public InventorySlot SelectedSlot { get; private set; }
 
@@ -16,8 +17,8 @@ namespace InventorySystem
                 bagSlots[i].OnSelectEvent += SetSelected;
             }
             
-            Inventory.Instance.OnAddItem += Instance_OnAddItem;
-            Inventory.Instance.OnRemoveItem += Inventory_OnRemoveItem;
+            inventory.OnAddItem += Instance_OnAddItem;
+            inventory.OnRemoveItem += Inventory_OnRemoveItem;
         }
 
         private void Instance_OnAddItem(int index, Item item)
@@ -51,17 +52,8 @@ namespace InventorySystem
 
             var slotIndex = Array.IndexOf(bagSlots, SelectedSlot);
 
-            Inventory.Instance.AddCoins(SelectedSlot.fillingItem.Price);
-            Inventory.Instance.RemoveItem(slotIndex, SelectedSlot.fillingItem);
-        }
-
-        private void OnDestroy()
-        {
-            if (Inventory.Instance.isAlive)
-            {
-                Inventory.Instance.OnAddItem -= Instance_OnAddItem;
-                Inventory.Instance.OnRemoveItem -= Inventory_OnRemoveItem;
-            }
+            inventory.AddCoins(SelectedSlot.fillingItem.Price);
+            inventory.RemoveItem(slotIndex, SelectedSlot.fillingItem);
         }
     }
 }

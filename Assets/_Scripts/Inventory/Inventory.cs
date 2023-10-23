@@ -7,9 +7,6 @@ namespace InventorySystem
 {
     public class Inventory : MonoBehaviour
     {
-        public static Inventory Instance { get; private set; }
-        public bool isAlive { get; private set; }
-
         [SerializeField] private PlayerController player;
 
         [field: SerializeField] public int TotalSlot { get; private set; }
@@ -21,21 +18,6 @@ namespace InventorySystem
         public event Action<int, Item> OnAddItem;
         public event Action<int, Item> OnRemoveItem;
         public event Action<int> OnUpdateCoins;
-
-
-        private void Awake()
-        {
-            if (Instance == null)
-            {
-                Instance = this;
-                isAlive = true;
-                DontDestroyOnLoad(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
 
         private void Start()
         {
@@ -93,11 +75,6 @@ namespace InventorySystem
             }
 
             return true;
-        }
-
-        private void OnDestroy()
-        {
-            isAlive = false;
         }
     }
 }
