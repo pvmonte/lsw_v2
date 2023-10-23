@@ -90,6 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97c65f697e8e4704bf8d92e930df86d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventory: {fileID: 0}
   bagSlots:
   - {fileID: 4073684640162350793}
   - {fileID: 2575126057321585923}
@@ -220,6 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d7659f8b1e3f74a86ba42ab4d0a9c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inventory: {fileID: 0}
   coinText: {fileID: 2344950813311210733}
   equippedSlots: {fileID: 6430947913782514231}
   bag: {fileID: 2689123972843158623}
@@ -734,6 +736,7 @@ GameObject:
   - component: {fileID: 6259565087793618267}
   - component: {fileID: 6259565087793618268}
   - component: {fileID: 6259565087793618269}
+  - component: {fileID: 3356478472099376259}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -802,6 +805,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 2
+--- !u!114 &3356478472099376259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6259565087793618264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25c147f4b6e0b1a4ab2547a699c5b13c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6259565087871136356
 GameObject:
   m_ObjectHideFlags: 0

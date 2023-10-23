@@ -14,14 +14,6 @@ namespace InventorySystem
         [SerializeField] private EquippedSlots equippedSlots;
     
         [SerializeField] private BagUI bag;
-        
-        public event Action OnOpen;
-        public event Action OnClose;
-    
-        private void OnEnable()
-        {
-            OnOpen?.Invoke();
-        }
     
         private void Start()
         {
@@ -68,11 +60,6 @@ namespace InventorySystem
         public void Unequip(Item item)
         {
             equippedSlots.SetEmpty();
-        }
-    
-        private void OnDisable()
-        {
-            OnClose?.Invoke();
         }
     }
 }

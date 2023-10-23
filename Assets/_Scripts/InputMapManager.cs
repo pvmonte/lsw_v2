@@ -10,8 +10,8 @@ public class InputMapManager : MonoBehaviour
 {
     [SerializeField] private PlayerInput input;
 
-    [FormerlySerializedAs("shop")] [SerializeField] private ShopUI shopUI;
-    [SerializeField] private InventoryUI inventoryUI;
+    [SerializeField] private ShopPanel shopUI;
+    [SerializeField] private InventoryPanel inventoryUI;
     
     // Start is called before the first frame update
     void Start()
