@@ -4,64 +4,68 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class InventoryUI : MonoBehaviour
+namespace InventorySystem
 {
-
-    [SerializeField] private EquippedSlots equippedSlots;
-
-    [SerializeField] private BagUI bag;
+    public class InventoryUI : MonoBehaviour
+    {
     
-    public event Action OnOpen;
-    public event Action OnClose;
-
-    private void OnEnable()
-    {
-        OnOpen?.Invoke();
-    }
-
-    private void Start()
-    {
-        Inventory.Instance.OnAddItem += Inventory_OnAddItem;
-        Inventory.Instance.OnRemoveItem += Inventory_OnRemoveItem;
-        Initialize();
-    }
-
-    private void Inventory_OnRemoveItem(int index, Item item)
-    {
-        bag.SetSlotEmpty(index);
-    }
-
-    private void Inventory_OnAddItem(int index, Item item)
-    {
-        bag.FillSlot(index, item);
-    }
-
-    private void Initialize()
-    {
-        var inventoryItems = Inventory.Instance.GetInventoryItems();
+        [SerializeField] private EquippedSlots equippedSlots;
+    
+        [SerializeField] private BagUI bag;
         
-        for (int i = 0; i < inventoryItems.Count; i++)
+        public event Action OnOpen;
+        public event Action OnClose;
+    
+        private void OnEnable()
         {
-            bag.FillSlot(i, inventoryItems[i]);
+            OnOpen?.Invoke();
+        }
+    
+        private void Start()
+        {
+            Inventory.Instance.OnAddItem += Inventory_OnAddItem;
+            Inventory.Instance.OnRemoveItem += Inventory_OnRemoveItem;
+            Initialize();
+        }
+    
+        private void Inventory_OnRemoveItem(int index, Item item)
+        {
+            bag.SetSlotEmpty(index);
+        }
+    
+        private void Inventory_OnAddItem(int index, Item item)
+        {
+            bag.FillSlot(index, item);
+        }
+    
+        private void Initialize()
+        {
+            var inventoryItems = Inventory.Instance.GetInventoryItems();
+            
+            for (int i = 0; i < inventoryItems.Count; i++)
+            {
+                bag.FillSlot(i, inventoryItems[i]);
+            }
+        }
+    
+        public void Equip()
+        {
+            var item = bag.SelectedSlot.fillingItem;
+    
+            equippedSlots.Fill(item);
+            bag.SelectedSlot.Equip();
+            Inventory.Instance.EquipItem(item);
+        }
+    
+        public void Unequip(Item item)
+        {
+            equippedSlots.SetEmpty();
+        }
+    
+        private void OnDisable()
+        {
+            OnClose?.Invoke();
         }
     }
-
-    public void Equip()
-    {
-        var item = bag.SelectedSlot.fillingItem;
-
-        equippedSlots.Fill(item);
-        bag.SelectedSlot.Equip();
-        Inventory.Instance.EquipItem(item);
-    }
-
-    public void Unequip(Item item)
-    {
-        equippedSlots.SetEmpty();
-    }
-
-    private void OnDisable()
-    {
-        OnClose?.Invoke();
-    }
 }
+

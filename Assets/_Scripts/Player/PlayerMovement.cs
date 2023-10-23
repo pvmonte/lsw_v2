@@ -16,4 +16,9 @@ public class PlayerMovement : MonoBehaviour
         
         rb.velocity = currentSpeed * moveSpeed;
     }
+
+    public Vector2 GetVelocity()
+    {
+        return rb.velocity;
+    }
 }

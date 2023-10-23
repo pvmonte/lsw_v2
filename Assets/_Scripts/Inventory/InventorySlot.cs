@@ -4,47 +4,52 @@ using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Button))]
-public class InventorySlot : MonoBehaviour , ISelectHandler
+namespace InventorySystem
 {
-    //TODO: Remove crossed Reference
-    [SerializeField] private BagUI bagUI;
-    [field: SerializeField] public Item fillingItem { get; private set; } 
-    [SerializeField] private Image icon;
-    [SerializeField] private GameObject equippedIcon;
-
-    public void Fill(Item item)
+    [RequireComponent(typeof(Button))]
+    public class InventorySlot : MonoBehaviour, ISelectHandler
     {
-        fillingItem = item;
-        icon.sprite = item.Icon;
-        icon.color = Color.white;
-    }
+        //TODO: Remove crossed Reference
+        [SerializeField] private BagUI bagUI;
+        [field: SerializeField] public Item fillingItem { get; private set; }
+        [SerializeField] private Image icon;
+        [SerializeField] private GameObject equippedIcon;
 
-    public void SetEmpty()
-    {
-        fillingItem = null;
-        icon.sprite = null;
-        icon.color = Color.clear;
-    }
+        public void Fill(Item item)
+        {
+            if (!item) return;
 
-    public void Equip()
-    {
-        equippedIcon.SetActive(true);
-    }
+            fillingItem = item;
+            icon.sprite = item.Icon;
+            icon.color = Color.white;
+        }
 
-    public void Unequip()
-    {
-        equippedIcon.SetActive(false);
-    }
+        public void SetEmpty()
+        {
+            fillingItem = null;
+            icon.sprite = null;
+            icon.color = Color.clear;
+        }
 
-    public void OnSelect()
-    {
-        bagUI.SetSelected(this);
-    }
+        public void Equip()
+        {
+            equippedIcon.SetActive(true);
+        }
 
-    public void OnSelect(BaseEventData eventData)
-    {
-        OnSelect();
+        public void Unequip()
+        {
+            equippedIcon.SetActive(false);
+        }
+
+        public void OnSelect()
+        {
+            bagUI.SetSelected(this);
+        }
+
+        public void OnSelect(BaseEventData eventData)
+        {
+            OnSelect();
+        }
     }
 }
 

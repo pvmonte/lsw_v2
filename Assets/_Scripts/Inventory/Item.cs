@@ -9,12 +9,16 @@ public enum ItemType
     Hat
 }
 
-[CreateAssetMenu(menuName = "Item", fileName = "Item")]
-public class Item : ScriptableObject
+namespace InventorySystem
 {
-    [field: SerializeField] public ItemType Type { get; private set; }
-    [field: SerializeField] public string Name { get; private set; }
-    [field: SerializeField] public Sprite Icon { get; private set; }
-    [field: SerializeField] public int Price { get; private set; }
-    [field: SerializeField] public GameObject Prefab { get; private set; }
+    [CreateAssetMenu(menuName = "Item", fileName = "Item")]
+    public class Item : ScriptableObject
+    {
+        [field: SerializeField] public ItemType Type { get; private set; }
+        [field: SerializeField] public string Name { get; private set; }
+        [field: SerializeField] public Sprite Icon { get; private set; }
+        [field: SerializeField] public int Price { get; private set; }
+        [field: SerializeField] public GameObject Prefab { get; private set; }
+        [field: SerializeField] public Animator Animator { get; private set; }
+    }
 }

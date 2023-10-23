@@ -1,18 +1,27 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
-[System.Serializable]
-public class ItemSlot
+namespace InventorySystem
 {
-    [SerializeField] private GameObject equipped;
-    [SerializeField] private Transform slotTransform;
-
-    public void Equip(Item item)
+    public class ItemSlot : MonoBehaviour
     {
-        if (equipped != null)
+        [field: SerializeField] public ItemType Type { get; private set; }
+        [SerializeField] private GameObject equipped;
+        private Transform slotTransform;
+
+        private void Awake()
         {
-            GameObject.Destroy(equipped.gameObject);
+            slotTransform = transform;
         }
+
+        public void Equip(Item item)
+        {
+            if (equipped != null)
+            {
+                Destroy(equipped.gameObject);
+            }
         
-        equipped = GameObject.Instantiate(item.Prefab, slotTransform);
-    }
+            equipped = Instantiate(item.Prefab, slotTransform);
+        }
+    }    
 }
